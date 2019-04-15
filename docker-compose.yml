@@ -1,0 +1,55 @@
+version: '2'
+services:
+  mysqlmaster:
+    image: mysql:5.6
+    container_name: mysql-master
+    ports:
+      - '3306:3306'
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+    networks:
+      vpcbr:
+        ipv4_address: 10.20.1.2
+    volumes:
+      - ./data/mysql-master:/var/lib/mysql/
+      - ./config/mysql-master:/etc/mysql/conf.d/
+
+  mysqlslave:
+    image: mysql:5.6
+    container_name: mysql-slave
+    ports:
+      - '3307:3306'
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+    networks:
+      vpcbr:
+        ipv4_address: 10.20.1.3
+    depends_on:
+      - mysqlmaster
+    volumes:
+      - ./data/mysql-slave:/var/lib/mysql/
+      - ./config/mysql-slave:/etc/mysql/conf.d/
+
+  mysqlconfig:
+    image: mysql:5.6
+    container_name: mysql-config
+    environment:
+      - "MYSQL_SLAVE_PASSWORD=root"
+      - "MYSQL_MASTER_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_REPLICATION_USER=repl"
+      - "MYSQL_REPLICATION_PASSWORD=repl"
+    networks:
+      vpcbr:
+        ipv4_address: 10.20.1.4
+    volumes:
+      - ./mysql_connector.sh:/tmp/mysql_connector.sh
+    command: /bin/bash -x /tmp/mysql_connector.sh
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.20.1.0/16
+         gateway: 10.20.1.1

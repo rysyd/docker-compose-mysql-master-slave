@@ -1,0 +1,23 @@
+[mysqld]
+server-id=12
+character_set_server=utf8
+lower-case-table-names=1
+default-time-zone='+8:00'
+read_only=1
+
+skip-host-cache
+skip-name-resolve
+
+#general-log=ON
+general-log-file=/var/lib/mysql/query.log
+
+log_error=/var/lib/mysql/error.log
+
+# long_query_time=2
+# slow-query-log=ON
+slow_query_log_file=/var/lib/mysql/slow_query.log
+
+
+[client] 
+default-character-set=utf8
+
