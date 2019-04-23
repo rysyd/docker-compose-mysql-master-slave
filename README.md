@@ -4,7 +4,7 @@
 
 # Usage
 
-如需要修改 mysql 默认账号密码，修修 docker-compose.yml 文件内容
+如需要修改 mysql 默认账号密码，请修改 docker-compose.yml 文件内容
 
 假定你已经安装了 docker-compose
 
