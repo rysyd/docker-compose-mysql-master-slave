@@ -37,8 +37,6 @@ services:
       - "MYSQL_SLAVE_PASSWORD=root"
       - "MYSQL_MASTER_PASSWORD=root"
       - "MYSQL_ROOT_PASSWORD=root"
-      - "MYSQL_REPLICATION_USER=repl"
-      - "MYSQL_REPLICATION_PASSWORD=repl"
     networks:
       vpcbr:
         ipv4_address: 10.20.1.4
