@@ -11,7 +11,7 @@
 1、clone 这个地址
 
 ```shell
-$ clone https://github.com/hlwojiv/docker-compose-mysql-master-slave.git
+$ git clone https://github.com/hlwojiv/docker-compose-mysql-master-slave.git
 ```
 
 2、进入目录，部署 mysql 主从
